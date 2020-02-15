@@ -2,18 +2,16 @@ import React from 'react';
 import Header from '../header';
 import Footer from '../footer';
 import Content from '../content';
-import { Layout, Breadcrumb } from 'antd';
-
-const { Content: Container } = Layout;
+import { Container, BreadcrumbCustom } from './styled';
 
 const App = () => {
   return (
     <div className="App">
       <Header />
-      <Container style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-        </Breadcrumb>
+      <Container>
+        <BreadcrumbCustom>
+          <BreadcrumbCustom.Item>Home</BreadcrumbCustom.Item>
+        </BreadcrumbCustom>
         <Content />
       </Container>
       <Footer />
