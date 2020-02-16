@@ -1,20 +1,22 @@
 import React from 'react';
 import Header from '../header';
 import Footer from '../footer';
-import Content from '../content';
-import { Container, BreadcrumbCustom } from './styled';
+import Routes from '../../routes';
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
+import { Container } from './styled';
 
 const App = () => {
   return (
     <div className="App">
-      <Header />
-      <Container>
-        <BreadcrumbCustom>
-          <BreadcrumbCustom.Item>Home</BreadcrumbCustom.Item>
-        </BreadcrumbCustom>
-        <Content />
-      </Container>
-      <Footer />
+      <Router>
+        <Header />
+        <Container>
+          <Routes />
+        </Container>
+        <Footer />
+      </Router>
     </div>
   );
 }

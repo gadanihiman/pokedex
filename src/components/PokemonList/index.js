@@ -7,9 +7,9 @@ import { objectOf, bool, any, func } from 'prop-types';
 import { pokemonState } from '../../redux/Pokemon/selectors';
 import { getPokemonList } from '../../redux/Pokemon/action';
 import { getDataFromUrl } from '../../lib/helper';
-import { PokemonListWrapper, PokemonContainer } from './styled';
-import PokemonCard from '../PokemonList/PokemonCard';
-import Pagination from './components/Pagination';
+import { PokemonListWrapper, PokemonContainer } from '../styled';
+import PokemonCard from '../PokemonCard';
+import Pagination from '../Pagination';
 
 const Content = ({
   setPokemonList, isLoading, pokemonList,

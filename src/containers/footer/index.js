@@ -5,7 +5,16 @@ const { Footer: DefaultFooter } = Layout;
 
 const Footer = () => {
   return (
-    <DefaultFooter style={{ textAlign: 'center' }}>Pokemon Deck App with PokeApi</DefaultFooter>
+    <DefaultFooter
+      style={{ textAlign: 'center' }}>
+        Pokemon Deck App created by
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://www.linkedin.com/in/gadanihiman"
+        > Gadani Himan Gurusinga
+        </a> with PokeApi
+      </DefaultFooter>
   );
 }
 
