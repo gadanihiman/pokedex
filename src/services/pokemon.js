@@ -7,3 +7,11 @@ export const getPokemonListApi = (path = '/pokemon') => {
   }
   return request(path);
 };
+
+export const getPokemonDetailApi = id => {
+  if (isEmpty(id)) {
+    console.error('ID is empty');
+    return;
+  }
+  return request(`/pokemon/${id}`);
+};

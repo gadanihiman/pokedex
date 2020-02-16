@@ -42,3 +42,18 @@ export const PokemonCardWrapper = styled.div`
     width: unset;
   }
 `;
+
+export const PokemonCardDetail = styled(Card)`
+  width: 300;
+  margin-top: 16;
+`;
+
+export const AvatarPokemon = styled.img`
+  width: 200px;
+  height: 200px;
+  margin: auto;
+`;
+
+export const Section = styled.div`
+  margin-top: 10px;
+`;
