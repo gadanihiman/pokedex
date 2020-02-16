@@ -5,11 +5,15 @@ import {
   LOAD_POKEMON_DETAIL,
   LOAD_POKEMON_DETAIL_SUCCESS,
   LOAD_POKEMON_DETAIL_ERROR,
+  CATCH_POKEMON,
+  CATCH_POKEMON_SUCCESS,
+  CATCH_POKEMON_FAILED,
 } from './constant';
 
 const initialState = {
   loading: false,
   loadingDetail: false,
+  loadingCatch: false,
   error: false,
   pokemonList: {
     count: 0,
@@ -33,6 +37,8 @@ const initialState = {
     moves: [],
     stats: [],
   },
+  pokemonTarget: {},
+  myPokemon: [],
 };
 
 export default (state = initialState, action) => {
@@ -70,6 +76,29 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loadingDetail: false,
+        error: action.error,
+      };
+
+    case CATCH_POKEMON:
+      return {
+        ...state,
+        loadingCatch: true,
+      };
+    case CATCH_POKEMON_SUCCESS:
+      return {
+        ...state,
+        loadingCatch: false,
+        pokemonTarget: action.pokemonCatched.pokemon,
+        myPokemon: [
+          ...state.myPokemon,
+          action.pokemonCatched.pokemon,
+        ],
+      };
+    case CATCH_POKEMON_FAILED:
+      return {
+        ...state,
+        loadingCatch: false,
+        pokemonTarget: action.error.pokemon,
         error: action.error,
       };
     
