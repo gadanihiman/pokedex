@@ -15,3 +15,22 @@ export const getPokemonDetailApi = id => {
   }
   return request(`/pokemon/${id}`);
 };
+
+export const catchPokemonApi = async pokemon => {
+  const loadingTimer = 2000;
+  const result = !!Math.floor(Math.random() * 2);
+  const data = {
+    pokemon,
+    status: result,
+    message: result
+      ? `You are Lucky, Pokemon ${pokemon.name} is catched!`
+      : `Ohh.. You failed, Pokemon ${pokemon.name} is escaped!`,
+  }
+  return new Promise((resolve, reject) => {
+    if (result) {
+      setTimeout(() => resolve(data), loadingTimer);
+    } else {
+      setTimeout(() => reject(data), loadingTimer);
+    }
+  });
+};

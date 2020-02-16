@@ -15,12 +15,17 @@ import {
 } from 'antd';
 
 import { pokemonState } from '../../redux/Pokemon/selectors';
-import { getPokemonDetail } from '../../redux/Pokemon/action';
+import {
+  getPokemonDetail,
+  catchPokemon,
+} from '../../redux/Pokemon/action';
 import { PokemonCardDetail, AvatarPokemon, Section } from '../styled';
 import { capitalizeFirstLetter } from '../../lib/helper';
 import { TYPE_COLORS } from '../../lib/constant';
 
 const { Meta } = Card;
+
+// TODO: need to seperate Pokemon Description to a different directory and use its own selector
 
 const PokemonDescription = ({
   id,
@@ -32,25 +37,29 @@ const PokemonDescription = ({
   height,
   abilities,
   species,
+  onCatchPokemon,
+  pokemonDetail,
+  isCatching,
 }) => {
   const [showFullMoves, setShowFullMoves] = useState(false);
   const filteredMoves = !showFullMoves
     ? !isEmpty(moves) && moves.length > 10 && moves.slice(0, 10)
     : moves;
 
-  const catchPokemon = (evt, id) => {
+  const catchPokemon = (evt, pokemon) => {
     evt.preventDefault();
-    console.log('id', id)
+    onCatchPokemon(pokemon);
   };
 
   // TODO: need to seperate this component per each section
   return (
     <div>
       <Button
+        disabled={isCatching}
         type="primary"
-        onClick={e => catchPokemon(e, id)}
+        onClick={e => catchPokemon(e, pokemonDetail)}
       >
-          Catch this Pokemon!
+          {isCatching ? 'Catching...' : 'Catch this Pokemon!'}
       </Button>
       <Section style={{ marginTop: 25 }}>
         <h3> Profile </h3>
@@ -131,8 +140,10 @@ const PokemonDescription = ({
 };
 
 const PokemonDetail = ({
+  onCatchPokemon,
   setPokemonList,
   isLoading,
+  isCatching,
   pokemonDetail: {
     name,
     base_experience,
@@ -146,12 +157,26 @@ const PokemonDetail = ({
     weight,
     abilities,
     species,
-  }
+  },
 }) => {
   let { id } = useParams();
   const cardTitle = `Pokemon ${capitalizeFirstLetter(name)}`;
   const typeName = types.map(type => type.type.name);
   const themeColor = `#${TYPE_COLORS[typeName[typeName.length - 1]]}`;
+  const pokemonDetail = {
+    name,
+    base_experience,
+    sprites: {
+      front_default,
+    },
+    types,
+    moves,
+    stats,
+    height,
+    weight,
+    abilities,
+    species,
+  };
 
   useEffect(() => {
     setPokemonList(id);
@@ -195,6 +220,9 @@ const PokemonDetail = ({
             title={<h2>{capitalizeFirstLetter(name)}</h2>}
             description={
               <PokemonDescription
+                isCatching={isCatching}
+                onCatchPokemon={onCatchPokemon}
+                pokemonDetail={pokemonDetail}
                 id={id}
                 weight={weight}
                 height={height}
@@ -215,17 +243,21 @@ const PokemonDetail = ({
 
 export const mapStateToProps = createStructuredSelector({
   isLoading: pokemonState('loadingDetail'),
+  isCatching: pokemonState('loadingCatch'),
   pokemonDetail: pokemonState('pokemonDetail'),
 });
 
 const mapDispatchToProps = {
   setPokemonList: getPokemonDetail,
+  onCatchPokemon: catchPokemon,
 };
 
 PokemonDetail.propTypes = {
   isLoading: bool.isRequired,
+  isCatching: bool.isRequired,
   pokemonDetail: objectOf(any).isRequired,
   setPokemonList: func.isRequired,
+  onCatchPokemon: func.isRequired,
 };
 
 export default connect(
