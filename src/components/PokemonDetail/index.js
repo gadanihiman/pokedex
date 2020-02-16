@@ -164,6 +164,7 @@ const PokemonDetail = ({
   const themeColor = `#${TYPE_COLORS[typeName[typeName.length - 1]]}`;
   const pokemonDetail = {
     id,
+    key: Date.now(),
     name,
     base_experience,
     sprites: {

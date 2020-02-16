@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component Footer should successfully rendered 1`] = `
+<footer
+  className="ant-layout-footer"
+  style={
+    Object {
+      "textAlign": "center",
+    }
+  }
+>
+  Pokemon Deck App created by
+  <a
+    href="https://www.linkedin.com/in/gadanihiman"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+     Gadani Himan Gurusinga
+  </a>
+   with
+  <a
+    href="https://pokeapi.co/"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+     PokeApi
+  </a>
+</footer>
+`;

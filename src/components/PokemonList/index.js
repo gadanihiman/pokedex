@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { objectOf, bool, any, func } from 'prop-types';
+import { objectOf, bool, any, func, arrayOf } from 'prop-types';
+import { Link } from "react-router-dom";
 
 import { pokemonState } from '../../redux/Pokemon/selectors';
 import { getPokemonList } from '../../redux/Pokemon/action';
@@ -12,11 +13,12 @@ import PokemonCard from '../PokemonCard';
 import Pagination from '../Pagination';
 
 const Content = ({
-  setPokemonList, isLoading, pokemonList,
+  setPokemonList, isLoading, pokemonList, myPokemonList,
 }) => {
   const { next, previous } = pokemonList;
   const nextPath = !isEmpty(next) && `/${getDataFromUrl(next, 1)}`
   const previousPath = !isEmpty(previous) && `/${getDataFromUrl(previous, 1)}`
+  const ownedTotal = myPokemonList.length;
 
   useEffect(() => {
     setPokemonList()
@@ -28,6 +30,7 @@ const Content = ({
   return (
     <>
       <h2> Pokemon List </h2>
+      <h4> You have <Link to="/profile">{ownedTotal} Pokemon</Link> </h4>
       {isLoading ? (
         <PokemonCard loading={isLoading} />
       ) : (
@@ -51,6 +54,7 @@ const Content = ({
 export const mapStateToProps = createStructuredSelector({
   isLoading: pokemonState('loading'),
   pokemonList: pokemonState(),
+  myPokemonList: pokemonState('myPokemon'),
 });
 
 const mapDispatchToProps = {
@@ -61,6 +65,7 @@ Content.propTypes = {
   isLoading: bool.isRequired,
   pokemonList: objectOf(any).isRequired,
   setPokemonList: func.isRequired,
+  myPokemonList: arrayOf(any).isRequired,
 };
 
 export default connect(

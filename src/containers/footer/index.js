@@ -13,7 +13,12 @@ const Footer = () => {
           target="_blank"
           href="https://www.linkedin.com/in/gadanihiman"
         > Gadani Himan Gurusinga
-        </a> with PokeApi
+        </a> with
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://pokeapi.co/"
+        > PokeApi</a>
       </DefaultFooter>
   );
 }

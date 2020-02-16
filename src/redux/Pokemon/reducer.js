@@ -8,7 +8,9 @@ import {
   CATCH_POKEMON,
   CATCH_POKEMON_SUCCESS,
   CATCH_POKEMON_FAILED,
+  DELETE_POKEMON,
 } from './constant';
+import { find, remove } from 'lodash';
 
 const initialState = {
   loading: false,
@@ -101,6 +103,14 @@ export default (state = initialState, action) => {
         pokemonTarget: action.error.pokemon,
         error: action.error,
       };
+    case DELETE_POKEMON: {
+      const pokemonFiltered =
+        state.myPokemon.filter(pokemon => pokemon.key !== action.id);
+      return {
+        ...state,
+        myPokemon: pokemonFiltered,
+      };
+    };
     
     default:
       return state;
