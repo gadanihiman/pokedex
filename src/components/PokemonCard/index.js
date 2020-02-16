@@ -5,10 +5,12 @@ import { PokemonCardWrapper, CustomCard, CardTitle, Sprite } from '../styled';
 
 const { Meta } = Card;
 
-const PokemonCard = ({ name, loading, pokeId }) => {
+const PokemonCard = ({ name, loading, pokeId, imageSrc }) => {
   const [imageLoading, setImageLoading] = useState(true);
   const imageUrl =
-    `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokeId}.png?raw=true`;
+    !imageSrc 
+      ? `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokeId}.png?raw=true`
+      : imageSrc;
   const detailLink = `/pokemon/${pokeId}`
   return (
     <PokemonCardWrapper>

@@ -4,6 +4,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './root-reducers';
 import rootSaga from './root-saga';
 
+// TODO: if needed, can integrate my pokemon list with redux persist
+
 const sagaMiddleware = createSagaMiddleware();
 
 const bindMiddleware = middleware => {

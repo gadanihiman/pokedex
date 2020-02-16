@@ -28,7 +28,6 @@ const { Meta } = Card;
 // TODO: need to seperate Pokemon Description to a different directory and use its own selector
 
 const PokemonDescription = ({
-  id,
   types,
   moves,
   stats,
@@ -164,6 +163,7 @@ const PokemonDetail = ({
   const typeName = types.map(type => type.type.name);
   const themeColor = `#${TYPE_COLORS[typeName[typeName.length - 1]]}`;
   const pokemonDetail = {
+    id,
     name,
     base_experience,
     sprites: {
