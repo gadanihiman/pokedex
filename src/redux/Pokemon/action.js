@@ -5,6 +5,7 @@ import {
   LOAD_POKEMON_DETAIL_SUCCESS,
   CATCH_POKEMON,
   CATCH_POKEMON_SUCCESS,
+  DELETE_POKEMON,
 } from './constant';
 
 export const getPokemonList = payload => ({
@@ -32,9 +33,12 @@ export const catchPokemon = payload => ({
   pokemon: payload,
 });
 
-export const catchPokemonSuccess = payload => {
-  return {
-    type: CATCH_POKEMON_SUCCESS,
-    pokemonCatched: payload,
-  };
-};
+export const catchPokemonSuccess = payload => ({
+  type: CATCH_POKEMON_SUCCESS,
+  pokemonCatched: payload,
+});
+
+export const deletePokemon = payload => ({
+  type: DELETE_POKEMON,
+  id: payload,
+});

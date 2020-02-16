@@ -25,8 +25,7 @@ export const PokemonListWrapper = styled.div`
 `;
 
 export const PokemonContainer = styled.div`
-  /* width: 900px; */
-  margin: auto;
+  margin-top: 20px;
 `;
 
 export const Sprite = styled.img`

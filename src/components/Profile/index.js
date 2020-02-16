@@ -21,9 +21,16 @@ const Profile = ({
         <PokemonListWrapper>
           {!isEmpty(myPokemonList) ? (
             myPokemonList.map((data) => {
-              const { id, name, sprites: { front_default } } = data;
+              const { id, key, name, sprites: { front_default } } = data;
               return (
-                <PokemonCard name={name} key={id} pokeId={id} imageSrc={front_default} />
+                <PokemonCard
+                  name={name}
+                  key={key}
+                  indexKey={key}
+                  pokeId={id}
+                  imageSrc={front_default}
+                  withDeleteBtn
+                />
               );
             })
           ) : (
